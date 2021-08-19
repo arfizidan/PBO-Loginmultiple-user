@@ -29,7 +29,7 @@
 
                             <div class="form-group">
                                 <label class="font-weight-bold">E-MAIL</label>
-                                <input type="text" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email', $edit->email) }}" placeholder="Masukkan Nama">
+                                <input type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email', $edit->email) }}" placeholder="Masukkan Email">
                             
                                 <!-- error message untuk email -->
                                 @error('email')

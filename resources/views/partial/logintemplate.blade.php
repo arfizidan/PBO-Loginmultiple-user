@@ -19,10 +19,15 @@
 
     <!-- Custom styles for this template-->
     <link href="{{asset('template/css/sb-admin-2.min.css')}}" rel="stylesheet">
+    <style>
+        body {
+            background-image: linear-gradient(to right bottom, #4e73df, #557de4, #5d88e8, #6692ec, #709cf0);
+            }
+    </style>
 
 </head>
 
-<body class="bg-gradient-primary">
+<body>
 
     <div class="container">
 

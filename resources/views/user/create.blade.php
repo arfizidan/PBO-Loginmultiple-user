@@ -29,7 +29,7 @@
 
                             <div class="form-group">
                                 <label class="font-weight-bold">E-MAIL</label>
-                                <input type="text" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" placeholder="Masukkan Nama">
+                                <input type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" placeholder="Masukkan Email">
                             
                                 <!-- error message untuk email -->
                                 @error('email')
@@ -41,7 +41,7 @@
 
                             <div class="form-group">
                                 <label class="font-weight-bold">PASSWORD</label>
-                                <input type="text" class="form-control @error('password') is-invalid @enderror" name="password" value="{{ old('password') }}" placeholder="Masukkan Nama">
+                                <input type="password" class="form-control @error('password') is-invalid @enderror" name="password" value="{{ old('password') }}" placeholder="Masukkan Password">
                             
                                 <!-- error message untuk password -->
                                 @error('password')

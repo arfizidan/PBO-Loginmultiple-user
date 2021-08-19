@@ -100,7 +100,7 @@
         var akunid = $(this).attr('data-id');
         swal({
                 title: "Yakin Ingin Menghapus?",
-                text: "Anda Akan Menghapus Data Blog Dengan No ID : " + akunid + "",
+                text: "Anda Akan Menghapus Data User Dengan No ID : " + akunid + "",
                 icon: "warning",
                 buttons: ["BATAL", "OK"],
                 dangerMode: true,
