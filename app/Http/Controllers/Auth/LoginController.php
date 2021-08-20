@@ -3,9 +3,12 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
-use App\Providers\RouteServiceProvider;
-use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\Support\Facades\Auth;
+use App\Http\Requests\AuthRequest;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
+use App\Models\User;
+use Alert;
 
 class LoginController extends Controller
 {
@@ -20,14 +23,28 @@ class LoginController extends Controller
     |
     */
 
-    use AuthenticatesUsers;
+    public function showLoginForm()
+    {
+        return view('auth.login');
+    }
 
-    /**
-     * Where to redirect users after login.
-     *
-     * @var string
-     */
-    protected $redirectTo = '/blog';
+    public function login(AuthRequest $request)
+    {
+        $validate = $request->validated();
+        $remember = $request->remember == 'on' ? true : false; // rememberme
+        if (Auth::attempt($request->only('email', 'password'), $remember)) {
+            if (Auth()->user()->role == 'admin') {
+                toast('Berhasil Login Welcome Admin','success');
+                return redirect('/dashboard');
+            } else if (Auth()->user()->role == 'creator') {
+                toast('Berhasil Login Welcome Creator','success');
+                return redirect('/blog');
+            }
+        } else {
+            Alert::warning('GAGAL LOGIN', 'Periksa Kembali Email Dan Password Anda');
+            return redirect('/');
+        }
+    }
 
     /**
      * Create a new controller instance.
@@ -36,12 +53,14 @@ class LoginController extends Controller
      */
     public function logout(Request $request)
     {
-        $this->guard()->logout();
- 
+        Auth::guard('web')->logout();
+
         $request->session()->flush();
- 
-        $request->session()->regenerate();
- 
-        return redirect('/login');
+
+        $request->session()->invalidate();
+
+        $request->session()->regenerateToken();
+
+        return redirect('/');
     }
 }
