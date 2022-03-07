@@ -66,7 +66,7 @@
                             </div>
                         
 
-                            <a href="/user" class="btn btn-success font-weight-bold">Kembali</a>
+                            <a href="/akun" class="btn btn-success font-weight-bold">Kembali</a>
                             <button type="submit" class="btn btn-md btn-primary font-weight-bold">Simpan</button>
 
                         </form> 

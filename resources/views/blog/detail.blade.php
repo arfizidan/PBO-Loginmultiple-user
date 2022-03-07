@@ -36,8 +36,8 @@
                     <tbody>
                     @php $no = 1; @endphp
                                 <tr class="text-center">
-                                    <td>{{ $no++ }}</td>
-                                    <td><img src="{{ Storage::url('public/blogs/').$detail->image }}" class="rounded" style="width: 120px; height:120px;"></td>
+                                    <td>{{ $no++ }}</td>                                    
+                                    <td><img src="{{ asset ('img/foto_blog/' .$detail->image) }}" class="rounded" style="width: 120px; height:120px;"></td>
                                     <td>{{ $detail->title }}</td>
                                     <td>{!! $detail->content !!}</td>
                                     </div>

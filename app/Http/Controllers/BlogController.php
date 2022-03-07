@@ -51,11 +51,12 @@ public function store(Request $request)
     ]);
 
     //upload image
-    $image = $request->file('image');
-    $image->storeAs('public/blogs', $image->hashName());
+    $nm = $request->image;
+    $namefile = date('YmdHis').'.'.$nm->GetClientOriginalExtension();
+    $nm->move(public_path().'/img/foto_blog/',$namefile);
 
     $blog = Blog::create([
-        'image'     => $image->hashName(),
+        'image'     => $namefile,
         'title'     => $request->title,
         'content'   => $request->konten
     ]);
@@ -72,7 +73,7 @@ public function store(Request $request)
 
 public function show($id)
     {
-        $detail = Blog::find($id);
+        $detail = Blog::find($id);        
         return view('blog.detail', compact('detail'));
     }
 
@@ -109,14 +110,15 @@ public function update(Request $request, Blog $blog)
     } else {
 
         //hapus old image
-        Storage::disk('local')->delete('public/blogs/'.$blog->image);
-
+        // Storage::disk('local')->delete('public/blogs/'.$blog->image);
+        unlink(public_path() . '/img/foto_blog/' . $blog->image);
         //upload new image
-        $image = $request->file('image');
-        $image->storeAs('public/blogs', $image->hashName());
+        $nm = $request->image;
+        $namefile = date('YmdHis').'.'.$nm->GetClientOriginalExtension();
+        $nm->move(public_path().'/img/foto_blog/',$namefile);
 
         $blog->update([
-            'image'     => $image->hashName(),
+            'image'     => $namefile,
             'title'     => $request->title,
             'content'   => $request->konten
         ]);
@@ -136,7 +138,7 @@ public function update(Request $request, Blog $blog)
     public function delete($id)
     {
       $blog = Blog::findOrFail($id);
-      Storage::disk('local')->delete('public/blogs/'.$blog->image);
+      unlink(public_path() . '/img/foto_blog/' . $blog->image);
       $blog->delete();
     
       if($blog){
